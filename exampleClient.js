@@ -8,7 +8,7 @@ console.log('Client :)');
 
 const client = net.createConnection(
   {
-    host: '99.228.192.84', 
+    host: '99.228.192.84',
     port: 3001
   }
 );
@@ -19,16 +19,16 @@ client.write(`${username} has entered the chat!`);
 //  client.write('Move: Up');
 stdin.on('data', data => {
   client.write(`${username}: ${data}`);
-})
+});
 
 client.setEncoding('utf8');
 
 client.on('data', data => {
   console.log(data);
-})
+});
 // snake: client.write('move: up')
 // setInterval(() => {
 //   client.write(`${username}: Hello World!!!`);
 
 // }, 4000)
-//host: "99.228.192.84", 
+//host: "99.228.192.84",
