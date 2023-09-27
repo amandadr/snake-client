@@ -29,6 +29,12 @@ const setupInput = function(connection) {
       interval = setInterval(() => {
         connection.write('Move: right');
       }, 100);
+    } else if (key === '\u0030') {
+      connection.write('Say: YUMM')
+    } else if (key === '\u0031') {
+      connection.write('Say: YUMMY')
+    } else if (key === '\u0032') {
+      connection.write('Say: YIKES')
     }
   });
   return stdin;
