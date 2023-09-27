@@ -1,34 +1,29 @@
-const net = require('net');
-const stdin = process.stdin;
-stdin.setEncoding('utf8');
+const net = require("net");
 
-const username = 'Kool-Aid Man';
+// establishes a connection with the game server
+const connect = function () {
+  const conn = net.createConnection({
+    host: '165.227.47.243',// IP address here,
+    port: 50541 // PORT number here,
+  });
 
-console.log('Client :)');
+  const username = 'Name: ADR';
+  
+  // interpret incoming data as text
+  conn.setEncoding("utf8");
 
-const client = net.createConnection(
-  {
-    host: '99.228.192.84', 
-    port: 3001
-  }
-);
-
-client.write(`${username} has entered the chat!`);
-
-// move the snake using setInterval
-//  client.write('Move: Up');
-stdin.on('data', data => {
-  client.write(`${username}: ${data}`);
-})
-
-client.setEncoding('utf8');
-
-client.on('data', data => {
-  console.log(data);
-})
-// snake: client.write('move: up')
-// setInterval(() => {
-//   client.write(`${username}: Hello World!!!`);
-
-// }, 4000)
-//host: "99.228.192.84", 
+  //When I finally connect...
+  conn.on('connect', function() {
+    console.log('I have connected!');
+    conn.write(`${username}`);
+  })
+ 
+  conn.on("data", (data) => {
+    console.log('user says:', data);
+  });
+  
+  return conn;
+};
+module.exports = {
+  connect,
+};
